@@ -1,76 +1,139 @@
-# 🧬 RNA-seq Analysis of Bovine Embryos with Differential Cryotolerance
+# 🧬 RNA-seq–Based Variant Calling in Bovine Embryos with Differential Cryotolerance
 
-This repository contains a complete RNA-seq analysis pipeline developed during my Master's research, focusing on transcriptional and functional differences between bovine embryos with high and low cryotolerance.
+This repository contains a complete bioinformatics workflow for variant calling from RNA-seq data generated from bovine embryos with contrasting cryotolerance phenotypes. The project focuses on identifying genetic variants located in expressed regions and investigating the biological pathways impacted by genes harboring these variants.
 
----
+This analysis was developed as part of my Master's research in reproductive and developmental biology with an emphasis on functional genomics and bioinformatics.
 
-## 🔬 Biological Background
+# 🔬 Biological Background
 
-Embryo cryotolerance is a critical factor affecting the success of cryopreservation in bovine assisted reproduction. Molecular mechanisms related to cellular stress response, energy metabolism, membrane integrity, and mitochondrial function play key roles in embryo survival after freezing and thawing.
+Embryo cryotolerance is a critical determinant of cryopreservation success in bovine assisted reproduction. Differences in post-thaw survival have been associated with molecular mechanisms involving cellular stress response, mitochondrial function, energy metabolism, membrane stability, and signaling pathways.
 
-This project investigates transcriptomic differences associated with **high** and **low cryotolerance phenotypes** in bovine embryos using RNA sequencing and functional enrichment analysis.
+By integrating RNA-seq–based variant calling with functional enrichment analysis, this project aims to highlight genetic variants in transcriptionally active genes that may contribute to differences in embryo cryotolerance.
 
----
+# 🧪 Experimental Design
 
-## 🧪 Experimental Design
+RNA-seq data were obtained from bovine embryos classified into two experimental groups:
 
-RNA-seq data were generated from bovine embryos classified into two experimental groups:
+Group	Description:
 
-| Phenotype | Description |
-|---------|-------------|
-| High Cryotolerance | Embryos with high post-thaw survival |
-| Low Cryotolerance | Embryos with low post-thaw survival |
+* High Cryotolerance	Embryos with high post-thaw survival
 
----
+* Low Cryotolerance	Embryos with low post-thaw survival
 
-## ⚙️ Bioinformatics Workflow
 
-### 1️⃣ RNA-seq Alignment and Quantification (Linux / HISAT2)
+Variants were identified from RNA-seq alignments and subsequently mapped to genes to enable functional interpretation.
 
-RNA-seq preprocessing was performed in a Linux environment and included:
+# ⚙️ Bioinformatics Workflow Overview
 
-- Quality control of raw FASTQ files  
-- Alignment to the bovine reference genome using **HISAT2**  
-- Sorting and indexing of BAM files  
-- Gene-level read quantification using `featureCounts`  
+The analysis integrates Linux-based processing, variant calling, and R-based downstream analysis:
 
----
+# 1️⃣ RNA-seq Alignment (Linux)
 
-### 2️⃣ Differential Expression Analysis (R / DESeq2)
+Quality-controlled RNA-seq reads were aligned to the Bos taurus reference genome using HISAT2, a splice-aware aligner suitable for RNA-seq data.
 
-Downstream analyses were conducted in **R** using **DESeq2**, including:
+The --dta option was used to optimize alignments for downstream transcript- and variant-aware analyses.
 
-- Import of raw gene count matrices
-- Data normalization (VST)
-- Exploratory analysis (PCA)
-- Differential gene expression analysis between cryotolerance groups
+# 2️⃣ Alignment Processing
 
----
+SAM files were converted to BAM format using SAMtools
 
-## 🧠 Functional Enrichment Analysis
+BAM files were sorted and indexed to enable efficient variant calling
 
-Differentially expressed genes were subjected to functional enrichment analysis using **GO** and **KEGG** databases to identify biological processes and pathways associated with embryo cryotolerance.
+# 3️⃣ Variant Calling from RNA-seq
 
----
+Variants were called directly from aligned RNA-seq BAM files using bcftools
 
-## 🔐 Data Availability
+Resulting variants were stored in VCF format
 
-Due to data confidentiality, the datasets provided in this repository are simulated or derived from publicly available bovine RNA-seq data. All analytical steps reproduce the original workflow.
+This approach captures variants located in expressed genomic regions
 
----
+# 4️⃣ Variant Filtering and Gene Mapping (R)
 
-## 🛠️ Tools and Packages
+Variant data were imported and processed in R
 
-- HISAT2
-- featureCounts
-- R
-- DESeq2
-- clusterProfiler
-- ggplot2
-- org.Bt.eg.db
+Variants were filtered based on basic quality metrics
 
----
+Genes harboring variants were extracted for downstream analyses
 
-## 📌 Key Takeaways
+# 5️⃣ Functional Enrichment Analysis
 
-This project demonstrates a complete RNA-seq pipeline using HISAT2, integrating transcriptomic analysis with biological interpretation of pathways associated with embryo cryotolerance.
+Genes containing variants were subjected to pathway enrichment analysis
+
+KEGG and Gene Ontology (GO) databases were used to identify biological pathways and processes associated with cryotolerance-related genetic variation
+
+# 🧠 RNA-seq–Based Variant Calling Considerations
+
+- Variant calling in this project was performed using RNA-seq data rather than whole-genome sequencing. As such:
+
+- Only transcriptionally active regions are represented
+
+- Coverage varies according to gene expression levels
+
+- Splice-aware alignment (HISAT2) is essential
+
+- Allele-specific expression and transcript structure may influence variant detection
+
+- Despite these limitations, RNA-seq–based variant calling is well suited for identifying functionally relevant variants in expressed genes, particularly in the context of developmental and physiological phenotypes such as embryo cryotolerance.
+
+# 📊 Downstream Analyses and Visualization
+
+The project includes visual summaries such as:
+
+* Distribution of variants across genes
+
+* Comparative analyses between cryotolerance groups
+
+All figures generated by the pipeline are available in the figures/ directory.
+
+# 🔐 Data Availability and Reproducibility
+
+Due to data confidentiality and ethical constraints, the datasets provided in this repository are simulated or derived from representative structures of the original data.
+
+All scripts accurately reproduce the analytical workflow, ensuring transparency and reproducibility while protecting sensitive biological data.
+
+# 🛠️ Tools and Software Used
+* Linux / Command Line
+
+* HISAT2 — splice-aware RNA-seq aligner
+
+* SAMtools — alignment processing and indexing
+
+* bcftools — variant calling and VCF manipulation
+
+* R / Statistical Analysis
+
+* R
+
+* VariantAnnotation
+
+* clusterProfiler
+
+* org.Bt.eg.db
+
+* ggplot2
+
+* Databases
+
+* Bos taurus reference genome
+
+* KEGG
+
+* Gene Ontology (GO)
+
+# 📌 Key Takeaways
+
+This project demonstrates:
+
+Variant calling from RNA-seq data using splice-aware alignment
+
+Integration of genomic variants with functional pathway analysis
+
+Application of bioinformatics tools to reproductive and developmental biology
+
+Awareness of methodological limitations and best practices
+
+A reproducible and well-documented bioinformatics workflow
+
+# 👩‍🔬 Author
+
+Biologist (B.Sc.) from the Federal University of São Carlos (UFSCar), currently pursuing a Master’s degree, with experience in bioinformatics, RNA-seq analysis, variant calling, functional genomics, and biostatistics.
