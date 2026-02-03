@@ -6,84 +6,119 @@ This repository presents a genomic variant analysis pipeline developed during my
 
 ## 🔬 Biological Background
 
-Cryotolerance is a key factor influencing the success of bovine embryo cryopreservation in assisted reproduction programs. Genetic variation can affect cellular mechanisms involved in stress response, membrane integrity, and energy metabolism, ultimately impacting embryo survival after freezing and thawing.
+Cryotolerance is a key factor influencing the success of bovine embryo cryopreservation in assisted reproduction programs. Genetic variation affecting transcriptionally active genes may influence cellular mechanisms such as stress response, membrane integrity, mitochondrial activity, and energy metabolism, ultimately impacting embryo survival after freezing and thawing.
 
-This project investigates genomic variants associated with **high** and **low cryotolerance phenotypes** in bovine embryos and explores the biological pathways potentially impacted by these variants.
+This project investigates genetic variants associated with **high** and **low cryotolerance phenotypes** in bovine embryos and explores the biological pathways potentially impacted by genes harboring these variants.
 
 ---
 
 ## 🧪 Experimental Design
 
-Whole-genome sequencing data were obtained from bovine embryos classified into two phenotypic groups:
+RNA-seq data were obtained from bovine embryos classified into two phenotypic groups:
 
 | Phenotype | Description |
 |---------|-------------|
 | High Cryotolerance | Embryos with high post-thaw survival |
 | Low Cryotolerance | Embryos with low post-thaw survival |
 
-Variants were identified and compared between groups to detect candidate genes and pathways associated with cryotolerance.
+Variants were identified from RNA-seq alignments and compared between groups to highlight candidate genes and pathways associated with cryotolerance.
 
 ---
 
 ## ⚙️ Bioinformatics Workflow
 
-### 1️⃣ Variant Calling Pipeline (Linux)
+### 1️⃣ RNA-seq Alignment and Variant Calling (Linux)
 
 Variant discovery was performed in a Linux environment and included:
 
-- Read alignment to the bovine reference genome
-- Sorting and indexing of BAM files
-- Variant calling
-- Variant filtering and quality control
-- Generation of final VCF files
+- Splice-aware alignment of RNA-seq reads to the *Bos taurus* reference genome using **HISAT2**
+- Conversion, sorting, and indexing of alignment files using **SAMtools**
+- Variant calling from aligned RNA-seq data using **bcftools**
+- Generation of VCF files containing variants located in expressed genomic regions
 
 ---
 
 ### 2️⃣ Variant Annotation and Gene Mapping
 
-Identified variants were annotated to genes and genomic features, enabling the identification of genes harboring potentially impactful variants.
+Identified variants were processed and mapped to genes, allowing the identification of genes harboring variants potentially associated with cryotolerance phenotypes.
 
 ---
 
 ### 3️⃣ Functional Enrichment Analysis (R)
 
-Genes associated with variants were subjected to functional enrichment analysis in **R**, including:
+Genes containing variants were subjected to functional enrichment analysis in **R**, including:
 
-- Gene Ontology (GO) enrichment
-- Pathway analysis (e.g., KEGG, Reactome)
-- Visualization of enriched biological processes
+- Gene Ontology (GO) enrichment analysis
+- Pathway enrichment analysis (KEGG)
+- Visualization of enriched biological processes and pathways
 
 ---
 
 ## 📊 Data Visualization
 
-- Variant distribution plots
+The project includes visual summaries such as:
+
+- Distribution of variants across genes
 - Summary statistics of variant types
-- Functional enrichment plots
-- Pathway-level visualizations
+- Functional enrichment dot plots
+- Pathway-level visualizations highlighting biological mechanisms related to cryotolerance
+
+All generated figures are available in the `figures/` directory.
+
+---
+
+## ⚠️ RNA-seq–Based Variant Calling Considerations
+
+Variant calling in this project was performed using RNA-seq data rather than whole-genome sequencing. As a result:
+
+- Detected variants represent **transcriptionally active regions**
+- Coverage varies according to gene expression levels
+- Splice-aware alignment is essential for accurate variant detection
+- Results are interpreted as functionally relevant expressed variants
+
+This approach is appropriate for exploring variants with potential biological impact on embryo cryotolerance while acknowledging methodological limitations.
 
 ---
 
 ## 🔐 Data Availability and Reproducibility
 
-Due to data confidentiality, the datasets provided in this repository are simulated or derived from publicly available bovine genomic data. The analytical workflow, scripts, and parameters faithfully reproduce the original analysis.
+Due to data confidentiality, the datasets provided in this repository are **simulated** or derived from representative structures of the original data. All scripts and parameters faithfully reproduce the original analytical workflow.
 
 ---
 
-## 🛠️ Tools and Packages
+## 🛠️ Tools and Software Used
 
-- Linux-based variant calling tools
-- R
-- clusterProfiler
-- ggplot2
-- biomaRt
+### Linux / Command Line
+- **HISAT2**
+- **SAMtools**
+- **bcftools**
+
+### R / Statistical Analysis
+- **R**
+- **VariantAnnotation**
+- **clusterProfiler**
+- **org.Bt.eg.db**
+- **ggplot2**
+- **biomaRt**
+
+### Databases
+- *Bos taurus* reference genome
+- Gene Ontology (GO)
+- KEGG Pathway Database
 
 ---
 
 ## 📌 Key Takeaways
 
 This project demonstrates:
-- A complete genomic variant analysis pipeline
-- Integration of Linux-based pipelines with R-based functional analysis
-- Application of genomics to reproductive biology
-- Biological interpretation of variant-driven gene and pathway effects
+
+- Variant calling from RNA-seq data using splice-aware alignment
+- Integration of variant discovery with functional pathway analysis
+- Application of genomics to reproductive and developmental biology
+- Reproducible and well-documented bioinformatics workflows
+
+---
+
+## 👩‍🔬 Author
+
+Biologist (B.Sc., UFSCar), currently pursuing a Master’s degree, with experience in bioinformatics, RNA-seq analysis, variant calling, functional genomics, and biostatistics.
