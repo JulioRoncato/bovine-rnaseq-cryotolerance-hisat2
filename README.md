@@ -80,6 +80,19 @@ This approach is appropriate for exploring variants with potential biological im
 
 ---
 
+## 📊 Data Visualization
+
+### Variant Type Distribution
+Summary of variant classes identified from RNA-seq–based variant calling.
+
+![Variant Distribution](figures/variant_distribution.png)
+
+### Functional Enrichment of Variant-Associated Genes
+Pathway enrichment analysis of genes harboring genetic variants highlights biological processes potentially associated with embryo cryotolerance.
+
+![Pathway Enrichment](figures/pathway_enrichment.png)
+
+
 ## 🔐 Data Availability and Reproducibility
 
 Due to data confidentiality, the datasets provided in this repository are **simulated** or derived from representative structures of the original data. All scripts and parameters faithfully reproduce the original analytical workflow.
